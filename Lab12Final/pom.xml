@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>pl.rusio</groupId>
+	<artifactId>Lab12Final</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>Lab12Final</name>
+
+	<properties>
+		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.ws.cxf</groupId>
+			<artifactId>jbossws-cxf-client</artifactId>
+			<version>4.0.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<compilerArguments>
+						<endorseddirs>${endorsed.dir}</endorseddirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<version>2.6</version> <executions> <execution> <phase>validate</phase> <goals> 
+				<goal>copy</goal> </goals> <configuration> <outputDirectory>${endorsed.dir}</outputDirectory> 
+				<silent>true</silent> <artifactItems> <artifactItem> <groupId>javax</groupId> 
+				<artifactId>javaee-endorsed-api</artifactId> <version>7.0</version> <type>jar</type> 
+				</artifactItem> </artifactItems> </configuration> </execution> </executions> 
+				</plugin> -->
+			<plugin>
+				<groupId>org.jboss.ws.plugins</groupId>
+				<artifactId>maven-jaxws-tools-plugin</artifactId>
+				<version>1.1.2.Final</version>
+				<executions>
+					<execution>
+						<goals>
+<!-- 							<goal>wsconsume</goal> -->
+						</goals>
+						<configuration>
+							<wsdls>
+								<wsdl>http://localhost:8080/Lab12/LoanBroker?wsdl</wsdl>
+							</wsdls>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<!-- You should seriously consider using a repository manager or declare 
+			repositories in your settings.xml. See http://www.sonatype.com/people/2009/02/why-putting-repositories-in-your-poms-is-a-bad-idea/ -->
+		<repository>
+			<!-- The JBoss Public repository is a composite repository of several 
+				major repositories. See http://community.jboss.org/wiki/MavenGettingStarted-Users -->
+			<id>jboss-public-repository</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<!-- You can disable snapshot resolution to speed up your builds -->
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+
+</project>
